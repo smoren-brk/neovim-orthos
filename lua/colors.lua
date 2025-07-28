@@ -1,0 +1,53 @@
+local espresso = require('catppuccin')
+
+local color_overrides = {
+  macchiato = {
+    rosewater = '#F5B8AB',
+    flamingo = '#F29D9D',
+    pink = '#AD6FF7',
+    mauve = '#FF8F40',
+    red = '#E66767',
+    maroon = '#EB788B',
+    peach = '#FAB770',
+    yellow = '#FACA64',
+    green = '#70CF67',
+    teal = '#4CD4BD',
+    sky = '#61BDFF',
+    sapphire = '#4BA8FA',
+    blue = '#00BFFF',
+    lavender = '#00BBCC',
+    text = '#C1C9E6',
+    subtext1 = '#A3AAC2',
+    subtext0 = '#8E94AB',
+    overlay2 = '#7D8296',
+    overlay1 = '#676B80',
+    overlay0 = '#464957',
+    surface2 = '#3A3D4A',
+    surface1 = '#2F313D',
+    surface0 = '#1D1E29',
+    base = '#0b0b0b',
+    mantle = '#11111a',
+    crust = '#191926',
+  },
+}
+
+local integrations = {
+  cmp = true,
+  gitsigns = true,
+  treesitter = true,
+  telescope = {
+    enabled = true,
+    style = 'nvchad',
+  },
+  mini = {
+    enabled = true,
+  },
+}
+
+espresso.setup({
+  flavour = 'macchiato',
+  color_overrides = color_overrides,
+  integrations = integrations,
+})
+
+

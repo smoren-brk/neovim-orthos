@@ -1,0 +1,44 @@
+vim.g.mapleader = ' '
+vim.o.autoindent = true
+vim.o.backup = false
+vim.o.clipboard = 'unnamedplus'
+-- vim.o.cmdheight = 0
+vim.o.compatible = false
+vim.o.cursorline = true
+vim.o.expandtab = true
+vim.o.hlsearch = true
+vim.o.ignorecase = true
+vim.o.inccommand = 'split'
+vim.o.incsearch = true
+vim.o.list = true
+vim.o.mouse = 'a'
+vim.o.mouse = 'v'
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.shiftwidth = 4
+vim.o.showmatch = true
+vim.o.signcolumn = 'yes'
+-- vim.o.signcolumn = 'yes:1'
+vim.o.smartindent = true
+vim.o.smarttab = false
+vim.o.softtabstop = 4
+vim.o.splitbelow = true
+vim.o.splitkeep = 'screen'
+vim.o.splitright = true
+vim.o.startofline = false
+vim.o.swapfile = false
+vim.o.tabstop = 4
+vim.o.termguicolors = true
+vim.o.ttyfast = true
+vim.o.undofile = true
+vim.o.wildmode = 'longest,list'
+vim.o.winborder = 'rounded'
+vim.o.wrap = false
+
+vim.o.background = 'dark'
+vim.cmd.colorscheme('catppuccin')
+
+vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
+vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
+vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'none' })
+vim.api.nvim_set_hl(0, 'Pmenu', { bg = 'none' })
