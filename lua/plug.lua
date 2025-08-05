@@ -23,11 +23,25 @@ local plugins = {
 	  setup = true },
 
 	{ url = 'https://github.com/greggh/claude-code.nvim',
-	  setup = true },
+	  setup = function ()
+        require("claude-code").setup({
+          window = {
+            position = "float",
+            float = {
+              width = "70%",
+              height = "60%",
+              row = "60%",
+              col = "center",
+              relative = "editor",
+              border = "rounded",
+            },
+          },
+        })
+	  end },
 
 	{ url = 'https://github.com/nvim-lualine/lualine.nvim',
 	  dependencies = { 'https://github.com/nvim-tree/nvim-web-devicons' },
-	  setup = function()
+	  setup = function ()
 	    require('lualine').setup({
 	      options = {
 	        section_separators = { left = '', right = '' },

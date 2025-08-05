@@ -1,5 +1,6 @@
-require "plug"
-require "colors"
-require "options"
-require "keymap"
-require "lsp"
+require('plug')
+require('colors')
+require('options')
+require('keymap')
+require('lsp')
+

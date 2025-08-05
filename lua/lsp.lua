@@ -12,8 +12,10 @@ require('nvim-treesitter.configs').setup({
     'vimdoc',
     'hyprlang',
   },
-  sync_install = true,
+  sync_install = false,
   auto_install = true,
+  ignore_install = {},
+  modules = {},
   highlight = {
     enable = true,
   },
@@ -38,17 +40,33 @@ require("mason-lspconfig").setup({
 })
 
 
--- vim.lsp.config( 'lua_ls',  {
---     settings = {
---         Lua = {
---             workspace = {
---                 library = vim.api.nvim_get_runtime_file("", true)
---             }
---         }
---     }
--- })
+vim.lsp.config( 'lua_ls',  {
+    settings = {
+        Lua = {
+            workspace = {
+                library = vim.api.nvim_get_runtime_file("", true)
+            }
+        }
+    }
+})
 vim.lsp.config( 'lua_ls',  { })
 vim.lsp.enable({ 'lua_ls', 'pylsp' })
+
+vim.diagnostic.config({
+  signs = false,
+  virtual_text = {
+    prefix = '●',
+    spacing = 2,
+  },
+  float = {
+    focusable = false,
+    style = 'minimal',
+    border = 'rounded',
+    source = 'if_many',
+    header = '',
+    prefix = '',
+  },
+})
 
 
 require "blink.cmp".setup({
