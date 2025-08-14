@@ -1,16 +1,9 @@
 require('nvim-treesitter.configs').setup({
   ensure_installed = {
-    'c',
     'bash',
-    'c_sharp',
-    'go',
-    'haskell',
     'lua',
     'python',
     'rust',
-    'vim',
-    'vimdoc',
-    'hyprlang',
   },
   sync_install = false,
   auto_install = true,
@@ -34,7 +27,6 @@ require("mason-lspconfig").setup({
   ensure_installed = {
     "lua_ls",
     "pylsp",
-    "ltex",
   },
   automatic_installation = true,
 })
@@ -49,8 +41,7 @@ vim.lsp.config( 'lua_ls',  {
         }
     }
 })
-vim.lsp.config( 'lua_ls',  { })
-vim.lsp.enable({ 'lua_ls', 'pylsp' })
+vim.lsp.enable({ 'lua_ls', 'pylsp', 'csharp_ls' })
 
 vim.diagnostic.config({
   signs = false,

@@ -1,28 +1,39 @@
 local pack = require 'pack'
 
 local plugins = {
-	'https://github.com/catppuccin/nvim',
-	'https://github.com/nvim-treesitter/nvim-treesitter',
+	'catppuccin/nvim',
+	'nvim-treesitter/nvim-treesitter',
+    { url = 'nvim-telescope/telescope.nvim',
+      dependencies = { 'nvim-lua/plenary.nvim' },
+      setup = true },
 
-	{ url = 'https://github.com/echasnovski/mini.cursorword',
+    { url = 'renerocksai/telekasten.nvim',
+      dependencies = { 'nvim-telescope/telescope.nvim' },
+      setup = function()
+        require('telekasten').setup({
+          home = vim.fn.expand("~/zettelkasten"),
+        })
+      end },
+
+	{ url = 'echasnovski/mini.cursorword',
 	  setup = true },
 
-	{ url = 'https://github.com/echasnovski/mini.pick',
+	{ url = 'echasnovski/mini.pick',
 	  setup = true },
 
-	{ url = 'https://github.com/echasnovski/mini.starter',
+	{ url = 'echasnovski/mini.starter',
 	  setup = true },
 
-	{ url = 'https://github.com/echasnovski/mini.trailspace',
+	{ url = 'echasnovski/mini.trailspace',
 	  setup = true },
 
-	{ url = 'https://github.com/stevearc/oil.nvim',
+	{ url = 'stevearc/oil.nvim',
 	  setup = true },
 
-	{ url = 'https://github.com/svampkorg/moody.nvim',
+	{ url = 'svampkorg/moody.nvim',
 	  setup = true },
 
-	{ url = 'https://github.com/greggh/claude-code.nvim',
+	{ url = 'greggh/claude-code.nvim',
 	  setup = function ()
         require("claude-code").setup({
           window = {
@@ -39,8 +50,8 @@ local plugins = {
         })
 	  end },
 
-	{ url = 'https://github.com/nvim-lualine/lualine.nvim',
-	  dependencies = { 'https://github.com/nvim-tree/nvim-web-devicons' },
+	{ url = 'nvim-lualine/lualine.nvim',
+	  dependencies = { 'nvim-tree/nvim-web-devicons' },
 	  setup = function ()
 	    require('lualine').setup({
 	      options = {
@@ -50,16 +61,16 @@ local plugins = {
 	    })
 	  end },
 
-	{ url = 'https://github.com/williamboman/mason.nvim',
+	{ url = 'williamboman/mason.nvim',
 	  dependencies = {
-	    { url = 'https://github.com/williamboman/mason-lspconfig.nvim', setup = true },
-	    'https://github.com/neovim/nvim-lspconfig'
+	    { url = 'williamboman/mason-lspconfig.nvim', setup = true },
+	    'neovim/nvim-lspconfig'
 	  },
 	  setup = true },
 
-	{ url = 'https://github.com/Saghen/blink.cmp',
+	{ url = 'Saghen/blink.cmp',
 	  version = "v1.6.0",
-	  dependencies = { 'https://github.com/rafamadriz/friendly-snippets' }},
+	  dependencies = { 'rafamadriz/friendly-snippets' }},
 }
 
 pack.setup(plugins)
@@ -101,7 +112,7 @@ local default_plugins = {
 }
 
 for _, plug in ipairs(default_plugins) do
-  vim.g['loaded_' .. plug] = 1
+    vim.g['loaded_' .. plug] = 1
 end
 
 

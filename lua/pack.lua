@@ -5,17 +5,22 @@ local function process_plugin(plugin)
 
   -- Handle when plugin is just a string (URL)
   if type(plugin) == "string" then
-    processed.url = plugin
+    processed.url = plugin:match("^https?://") and plugin or "https://github.com/" .. plugin
     return processed
   end
 
   -- Handle the plugin URL/name (convert from lazy.nvim format)
+  local url = nil
   if plugin[1] then
-    processed.url = plugin[1]
+    url = plugin[1]
   elseif plugin.url then
-    processed.url = plugin.url
+    url = plugin.url
   elseif plugin.src then
-    processed.url = plugin.src
+    url = plugin.src
+  end
+  
+  if url then
+    processed.url = url:match("^https?://") and url or "https://github.com/" .. url
   end
 
   -- Handle version
