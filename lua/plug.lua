@@ -1,76 +1,110 @@
 local pack = require 'pack'
 
 local plugins = {
-	'catppuccin/nvim',
-	'nvim-treesitter/nvim-treesitter',
-    { url = 'nvim-telescope/telescope.nvim',
-      dependencies = { 'nvim-lua/plenary.nvim' },
-      setup = true },
+    'catppuccin/nvim',
+    'nvim-treesitter/nvim-treesitter',
 
-    { url = 'renerocksai/telekasten.nvim',
-      dependencies = { 'nvim-telescope/telescope.nvim' },
-      setup = function()
-        require('telekasten').setup({
-          home = vim.fn.expand("~/zettelkasten"),
-        })
-      end },
+    {
+        url = 'OXY2DEV/markview.nvim',
+        setup = true
+    },
 
-	{ url = 'echasnovski/mini.cursorword',
-	  setup = true },
+    {
+        url = 'lewis6991/gitsigns.nvim',
+        setup = true
+    },
 
-	{ url = 'echasnovski/mini.pick',
-	  setup = true },
+    {
+        url = 'nvim-telescope/telescope.nvim',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        setup = true
+    },
 
-	{ url = 'echasnovski/mini.starter',
-	  setup = true },
+    {
+        url = 'renerocksai/telekasten.nvim',
+        dependencies = { 'nvim-telescope/telescope.nvim' },
+        setup = function()
+            require('telekasten').setup({
+                home = vim.fn.expand("~/zettelkasten"),
+            })
+        end
+    },
 
-	{ url = 'echasnovski/mini.trailspace',
-	  setup = true },
+    {
+        url = 'echasnovski/mini.cursorword',
+        setup = true
+    },
 
-	{ url = 'stevearc/oil.nvim',
-	  setup = true },
+    {
+        url = 'echasnovski/mini.starter',
+        setup = true
+    },
 
-	{ url = 'svampkorg/moody.nvim',
-	  setup = true },
+    {
+        url = 'echasnovski/mini.trailspace',
+        setup = true
+    },
 
-	{ url = 'greggh/claude-code.nvim',
-	  setup = function ()
-        require("claude-code").setup({
-          window = {
-            position = "float",
-            float = {
-              width = "70%",
-              height = "60%",
-              row = "60%",
-              col = "center",
-              relative = "editor",
-              border = "rounded",
-            },
-          },
-        })
-	  end },
+    {
+        url = 'stevearc/oil.nvim',
+        setup = true
+    },
 
-	{ url = 'nvim-lualine/lualine.nvim',
-	  dependencies = { 'nvim-tree/nvim-web-devicons' },
-	  setup = function ()
-	    require('lualine').setup({
-	      options = {
-	        section_separators = { left = '', right = '' },
-	        component_separators = { left = '', right = '' },
-	      }
-	    })
-	  end },
+    {
+        url = 'svampkorg/moody.nvim',
+        setup = true
+    },
 
-	{ url = 'williamboman/mason.nvim',
-	  dependencies = {
-	    { url = 'williamboman/mason-lspconfig.nvim', setup = true },
-	    'neovim/nvim-lspconfig'
-	  },
-	  setup = true },
+    {
+        url = 'greggh/claude-code.nvim',
+        setup = function()
+            require("claude-code").setup({
+                window = {
+                    position = "float",
+                    float = {
+                        width = "70%",
+                        height = "60%",
+                        row = "60%",
+                        col = "center",
+                        relative = "editor",
+                        border = "rounded",
+                    },
+                },
+            })
+        end
+    },
 
-	{ url = 'Saghen/blink.cmp',
-	  version = "v1.6.0",
-	  dependencies = { 'rafamadriz/friendly-snippets' }},
+    {
+        url = 'nvim-lualine/lualine.nvim',
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        setup = function()
+            require('lualine').setup({
+                options = {
+                    section_separators = { left = '', right = '' },
+                    component_separators = { left = '', right = '' },
+                }
+            })
+        end
+    },
+
+    {
+        url = 'williamboman/mason.nvim',
+        dependencies = {
+            'neovim/nvim-lspconfig'
+        },
+        setup = true
+    },
+
+    {
+        url = 'williamboman/mason-lspconfig.nvim',
+        setup = true
+    },
+
+    {
+        url = 'Saghen/blink.cmp',
+        version = "v1.6.0",
+        dependencies = { 'rafamadriz/friendly-snippets' }
+    },
 }
 
 pack.setup(plugins)
@@ -83,38 +117,34 @@ vim.opt.conceallevel = 1
 
 -- List of default plugins to disable
 local default_plugins = {
-  '2html_plugin',
-  'getscript',
-  'getscriptPlugin',
-  'gzip',
-  'logipat',
-  'netrw',
-  'netrwPlugin',
-  'netrwSettings',
-  'netrwFileHandlers',
-  'matchit',
-  'tar',
-  'tarPlugin',
-  'rrhelper',
-  'spellfile_plugin',
-  'vimball',
-  'vimballPlugin',
-  'zip',
-  'zipPlugin',
-  'tutor',
-  'rplugin',
-  'syntax',
-  'synmenu',
-  'optwin',
-  'compiler',
-  'bugreport',
-  'ftplugin'
+    '2html_plugin',
+    'getscript',
+    'getscriptPlugin',
+    'gzip',
+    'logipat',
+    'netrw',
+    'netrwPlugin',
+    'netrwSettings',
+    'netrwFileHandlers',
+    'matchit',
+    'tar',
+    'tarPlugin',
+    'rrhelper',
+    'spellfile_plugin',
+    'vimball',
+    'vimballPlugin',
+    'zip',
+    'zipPlugin',
+    'tutor',
+    'rplugin',
+    'syntax',
+    'synmenu',
+    'optwin',
+    'compiler',
+    'bugreport',
+    'ftplugin'
 }
 
 for _, plug in ipairs(default_plugins) do
     vim.g['loaded_' .. plug] = 1
 end
-
-
-
-

@@ -1,41 +1,46 @@
-vim.g.mapleader = ' '
-vim.o.autoindent = true
-vim.o.backup = false
-vim.o.clipboard = 'unnamedplus'
--- vim.o.cmdheight = 0
-vim.o.compatible = false
-vim.o.cursorline = true
-vim.o.expandtab = true
-vim.o.hlsearch = true
-vim.o.ignorecase = true
-vim.o.inccommand = 'split'
-vim.o.incsearch = true
-vim.o.list = true
-vim.o.mouse = 'a'
-vim.o.mouse = 'v'
-vim.o.number = true
-vim.o.relativenumber = true
-vim.o.shiftwidth = 4
-vim.o.showmatch = true
-vim.o.signcolumn = 'yes'
--- vim.o.signcolumn = 'yes:1'
-vim.o.smartindent = true
-vim.o.smarttab = false
-vim.o.softtabstop = 4
-vim.o.splitbelow = true
-vim.o.splitkeep = 'screen'
-vim.o.splitright = true
-vim.o.startofline = false
-vim.o.swapfile = false
-vim.o.tabstop = 4
-vim.o.termguicolors = true
-vim.o.ttyfast = true
-vim.o.undofile = true
-vim.o.wildmode = 'longest,list'
-vim.o.winborder = 'rounded'
-vim.o.wrap = false
+local opts = {
+    autoindent = true,
+    backup = false,
+    clipboard = 'unnamedplus',
+    -- cmdheight = 0,
+    compatible = false,
+    cursorline = true,
+    expandtab = true,
+    hlsearch = true,
+    ignorecase = true,
+    inccommand = 'split',
+    incsearch = true,
+    list = true,
+    mouse = 'v',
+    number = true,
+    relativenumber = true,
+    shiftwidth = 4,
+    showmatch = true,
+    signcolumn = 'yes',
+    -- signcolumn = 'yes:1',
+    smartindent = true,
+    smarttab = false,
+    softtabstop = 4,
+    splitbelow = true,
+    splitkeep = 'screen',
+    splitright = true,
+    startofline = false,
+    swapfile = false,
+    tabstop = 4,
+    termguicolors = true,
+    ttyfast = true,
+    undofile = true,
+    wildmode = 'longest,list',
+    winborder = 'rounded',
+    wrap = false,
+    background = 'dark',
+}
 
-vim.o.background = 'dark'
+for option, value in pairs(opts) do
+    vim.o[option] = value
+end
+
+vim.g.mapleader = ' '
 vim.cmd.colorscheme('catppuccin')
 
 vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })

@@ -23,7 +23,7 @@ local keymaps = {
   { 'n', 'N', 'Nzzzv', { noremap = true } },
 
   -- Telescope mappings
-  { 'n', '<leader>ff', '<cmd>Telescope find_files<CR>' },
+  { 'n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<CR>" },
   { 'n', '<leader>fb', '<cmd>Telescope buffers<CR>' },
   { 'n', '<leader>fh', '<cmd>Telescope help_tags<CR>' },
   { 'n', '<leader>fg', '<cmd>Telescope live_grep<CR>' },

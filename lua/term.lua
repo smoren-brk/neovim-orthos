@@ -16,7 +16,7 @@ function M.toggle_popup_terminal()
     -- Create or reuse terminal buffer
     if not popup_term.buf or not vim.api.nvim_buf_is_valid(popup_term.buf) then
       popup_term.buf = vim.api.nvim_create_buf(false, true)
-      vim.api.nvim_buf_set_option(popup_term.buf, 'buftype', 'terminal')
+      vim.bo[popup_term.buf].buftype = 'terminal'
     end
 
     -- Calculate popup size
