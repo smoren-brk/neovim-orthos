@@ -1,17 +1,18 @@
-require('nvim-treesitter.configs').setup({
-  ensure_installed = {
-    'bash',
-    'lua',
-    'python',
-    'rust',
-  },
-  sync_install = false,
-  auto_install = true,
-  ignore_install = {},
-  modules = {},
-  highlight = {
-    enable = true,
-  },
+local treesitter = require('nvim-treesitter')
+
+treesitter.install({
+  'bash',
+  'lua',
+  'python',
+  'rust',
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function(args)
+    if pcall(vim.treesitter.start, args.buf) then
+      vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end
+  end,
 })
 
 vim.filetype.add({
@@ -32,15 +33,32 @@ require("mason-lspconfig").setup({
 })
 
 
-vim.lsp.config( 'lua_ls',  {
+-- vim.lsp.config( 'lua_ls',  {
+--     settings = {
+--         Lua = {
+--             workspace = {
+--                 library = vim.api.nvim_get_runtime_file("", true)
+--             }
+--         }
+--     }
+-- })
+
+vim.lsp.config('lua_ls', {
     settings = {
         Lua = {
             workspace = {
-                library = vim.api.nvim_get_runtime_file("", true)
+                library = vim.list_extend(
+                    vim.api.nvim_get_runtime_file("", true),
+                    { "/usr/share/hypr/stubs" }
+                )
+            },
+            diagnostics = {
+                globals = { "hl" }
             }
         }
     }
 })
+
 vim.lsp.enable({ 'lua_ls', 'pylsp', 'csharp_ls' })
 
 vim.diagnostic.config({

@@ -1,63 +1,82 @@
-local pack = require 'pack'
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not vim.uv.fs_stat(lazypath) then
+    local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
+    local out = vim.fn.system({
+        'git',
+        'clone',
+        '--filter=blob:none',
+        '--branch=stable',
+        lazyrepo,
+        lazypath,
+    })
+    if vim.v.shell_error ~= 0 then
+        error('Failed to clone lazy.nvim:\n' .. out)
+    end
+end
+vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
     'catppuccin/nvim',
-    'nvim-treesitter/nvim-treesitter',
+    {
+        'nvim-treesitter/nvim-treesitter',
+        build = ':TSUpdate',
+    },
+    'kkrampis/codex.nvim',
 
     {
-        url = 'OXY2DEV/markview.nvim',
-        setup = true
+        'OXY2DEV/markview.nvim',
+        config = true,
     },
 
     {
-        url = 'lewis6991/gitsigns.nvim',
-        setup = true
+        'lewis6991/gitsigns.nvim',
+        config = true,
     },
 
     {
-        url = 'nvim-telescope/telescope.nvim',
+        'nvim-telescope/telescope.nvim',
         dependencies = { 'nvim-lua/plenary.nvim' },
-        setup = true
+        config = true,
     },
 
     {
-        url = 'renerocksai/telekasten.nvim',
+        'renerocksai/telekasten.nvim',
         dependencies = { 'nvim-telescope/telescope.nvim' },
-        setup = function()
+        config = function()
             require('telekasten').setup({
                 home = vim.fn.expand("~/zettelkasten"),
             })
-        end
+        end,
     },
 
     {
-        url = 'echasnovski/mini.cursorword',
-        setup = true
+        'echasnovski/mini.cursorword',
+        config = true,
     },
 
     {
-        url = 'echasnovski/mini.starter',
-        setup = true
+        'echasnovski/mini.starter',
+        config = true,
     },
 
     {
-        url = 'echasnovski/mini.trailspace',
-        setup = true
+        'echasnovski/mini.trailspace',
+        config = true,
     },
 
     {
-        url = 'stevearc/oil.nvim',
-        setup = true
+        'stevearc/oil.nvim',
+        config = true,
     },
 
     {
-        url = 'svampkorg/moody.nvim',
-        setup = true
+        'svampkorg/moody.nvim',
+        config = true,
     },
 
     {
-        url = 'greggh/claude-code.nvim',
-        setup = function()
+        'greggh/claude-code.nvim',
+        config = function()
             require("claude-code").setup({
                 window = {
                     position = "float",
@@ -71,43 +90,47 @@ local plugins = {
                     },
                 },
             })
-        end
+        end,
     },
 
     {
-        url = 'nvim-lualine/lualine.nvim',
+        'nvim-lualine/lualine.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
-        setup = function()
+        config = function()
             require('lualine').setup({
                 options = {
                     section_separators = { left = '', right = '' },
                     component_separators = { left = '', right = '' },
                 }
             })
-        end
+        end,
     },
 
     {
-        url = 'williamboman/mason.nvim',
+        'williamboman/mason.nvim',
         dependencies = {
             'neovim/nvim-lspconfig'
         },
-        setup = true
+        config = true,
     },
 
     {
-        url = 'williamboman/mason-lspconfig.nvim',
-        setup = true
+        'williamboman/mason-lspconfig.nvim',
+        config = true,
     },
 
     {
-        url = 'Saghen/blink.cmp',
+        'Saghen/blink.cmp',
         version = "v1.6.0",
-        dependencies = { 'rafamadriz/friendly-snippets' }
+        dependencies = { 'rafamadriz/friendly-snippets' },
     },
 }
 
-pack.setup(plugins)
+require('lazy').setup(plugins, {
+    defaults = {
+        lazy = false,
+    },
+})
 
 
 

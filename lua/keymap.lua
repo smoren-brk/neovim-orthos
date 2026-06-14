@@ -30,6 +30,8 @@ local keymaps = {
   { 'n', '<leader>fs', '<cmd>Telescope git_status<CR>' },
   { 'n', '<leader>ft', '<cmd>Telescope<CR>' },
 
+  { 'n', '<leader>cc', '<cmd>CodexToggle<CR>' },
+
   -- Telekasten mappings
   { 'n', '<leader>tk', '<cmd>Telekasten<CR>' },
   { 'n', '<leader>tf', '<cmd>Telekasten find_notes<CR>' },
@@ -51,8 +53,6 @@ local keymaps = {
   { { 'n', 'v', 'x' }, '<leader>y', "'+y<CR>" },
   { { 'n', 'v', 'x' }, '<leader>d', "'+d<CR>" },
 
-  -- Claude Code
-  { 'n', '<leader>cc', '<cmd>ClaudeCode<CR>', { desc = 'Toggle Claude Code' } },
 }
 
 for _, keymap in ipairs(keymaps) do
