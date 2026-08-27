@@ -1,5 +1,6 @@
 local opts = {
     autoindent = true,
+    autoread = true,
     backup = false,
     clipboard = 'unnamedplus',
     -- cmdheight = 0,

@@ -21,7 +21,8 @@ local plugins = {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
     },
-    'kkrampis/codex.nvim',
+    'vuki656/review.nvim',
+    'sindrets/diffview.nvim',
 
     {
         'OXY2DEV/markview.nvim',
@@ -72,25 +73,6 @@ local plugins = {
     {
         'svampkorg/moody.nvim',
         config = true,
-    },
-
-    {
-        'greggh/claude-code.nvim',
-        config = function()
-            require("claude-code").setup({
-                window = {
-                    position = "float",
-                    float = {
-                        width = "70%",
-                        height = "60%",
-                        row = "60%",
-                        col = "center",
-                        relative = "editor",
-                        border = "rounded",
-                    },
-                },
-            })
-        end,
     },
 
     {

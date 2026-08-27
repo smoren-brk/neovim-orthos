@@ -1,5 +1,19 @@
 local term = require('term')
 
+local replace = function()
+    local word = vim.fn.expand("<cword>")
+    vim.api.nvim_feedkeys(
+        ":%s/" .. word .. "/" .. word .. "/g",
+        "n",
+        false
+    )
+    vim.api.nvim_feedkeys(
+        vim.api.nvim_replace_termcodes("<Left><Left>", true, false, true),
+        "n",
+        false
+    )
+end
+
 local keymaps = {
   -- Normal mode mappings
   { 'n', '<leader>gd', vim.lsp.buf.hover, { noremap = true } },
@@ -52,6 +66,8 @@ local keymaps = {
   -- Copy/delete to system clipboard
   { { 'n', 'v', 'x' }, '<leader>y', "'+y<CR>" },
   { { 'n', 'v', 'x' }, '<leader>d', "'+d<CR>" },
+
+  { { 'n', 'v', 'x' }, '<leader>s', replace },
 
 }
 
