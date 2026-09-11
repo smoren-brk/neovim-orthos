@@ -66,15 +66,8 @@ local plugins = {
     },
 
     {
-        'barrettruth/canola.nvim',
+        'stevearc/oil.nvim',
         config = true,
-    },
-
-    {
-        'noby-y/oil-xdg-filechooser.nvim',
-        lazy = false,
-        dependencies = { 'barrettruth/canola.nvim' },
-        opts = {},
     },
 
     {
