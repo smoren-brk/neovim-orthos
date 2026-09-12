@@ -71,7 +71,7 @@ local plugins = {
     },
 
     {
-        'barrettruth/canola.nvim',
+        'svampkorg/moody.nvim',
         config = true,
     },
 
