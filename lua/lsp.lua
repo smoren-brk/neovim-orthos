@@ -59,7 +59,31 @@ vim.lsp.config('lua_ls', {
     }
 })
 
-vim.lsp.enable({ 'lua_ls', 'pylsp', 'csharp_ls' })
+vim.lsp.enable({ 'lua_ls', 'pylsp', 'csharp_ls', 'ols' })
+
+vim.api.nvim_create_autocmd('BufWritePre', {
+  group = vim.api.nvim_create_augroup('NixFormatOnSave', { clear = true }),
+  pattern = '*.nix',
+  callback = function(args)
+    local lines = vim.api.nvim_buf_get_lines(args.buf, 0, -1, false)
+    local result = vim.system({ 'nixfmt' }, {
+      stdin = table.concat(lines, '\n') .. '\n',
+      text = true,
+    }):wait(5000)
+
+    if result.code ~= 0 then
+      vim.notify('nixfmt failed: ' .. (result.stderr or ''), vim.log.levels.ERROR)
+      return
+    end
+
+    local formatted = vim.split(result.stdout:gsub('\n$', ''), '\n', { plain = true })
+    if not vim.deep_equal(lines, formatted) then
+      local view = vim.fn.winsaveview()
+      vim.api.nvim_buf_set_lines(args.buf, 0, -1, false, formatted)
+      vim.fn.winrestview(view)
+    end
+  end,
+})
 
 vim.diagnostic.config({
   signs = false,

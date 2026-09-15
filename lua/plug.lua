@@ -66,7 +66,9 @@ local plugins = {
     },
 
     {
-        'stevearc/oil.nvim',
+        'barrettruth/canola.nvim',
+        branch = 'main',
+        main = 'oil',
         config = true,
     },
 
@@ -108,7 +110,16 @@ local plugins = {
     },
 }
 
+local lockfile = vim.fn.stdpath('state') .. '/lazy-lock.json'
+if not vim.uv.fs_stat(lockfile) then
+    -- Seed writable state from this config, including when loaded with -u.
+    local config_dir = vim.fn.fnamemodify(debug.getinfo(1, 'S').source:sub(2), ':h:h')
+    vim.fn.mkdir(vim.fn.stdpath('state'), 'p')
+    assert(vim.uv.fs_copyfile(config_dir .. '/lazy-lock.json', lockfile))
+end
+
 require('lazy').setup(plugins, {
+    lockfile = lockfile,
     defaults = {
         lazy = false,
     },
