@@ -32,8 +32,12 @@ local color_overrides = {
 }
 
 local integrations = {
-    cmp = true,
+    blink_cmp = true,
+    diffview = true,
     gitsigns = true,
+    markview = true,
+    mason = true,
+    telekasten = true,
     treesitter = true,
     telescope = {
         enabled = true,
@@ -47,5 +51,7 @@ local integrations = {
 espresso.setup({
     flavour = 'macchiato',
     color_overrides = color_overrides,
+    -- Use explicit integrations so detection does not initialize vim.pack.
+    auto_integrations = false,
     integrations = integrations,
 })

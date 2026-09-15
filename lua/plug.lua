@@ -21,8 +21,16 @@ local plugins = {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
     },
-    'vuki656/review.nvim',
-    'sindrets/diffview.nvim',
+    {
+        'vuki656/review.nvim',
+        lazy = true,
+        cmd = 'Review',
+    },
+    {
+        'sindrets/diffview.nvim',
+        lazy = true,
+        cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },
+    },
 
     {
         'OXY2DEV/markview.nvim',
@@ -31,17 +39,23 @@ local plugins = {
 
     {
         'lewis6991/gitsigns.nvim',
+        lazy = true,
+        event = { 'BufReadPre', 'BufNewFile' },
         config = true,
     },
 
     {
         'nvim-telescope/telescope.nvim',
+        lazy = true,
+        cmd = 'Telescope',
         dependencies = { 'nvim-lua/plenary.nvim' },
         config = true,
     },
 
     {
         'renerocksai/telekasten.nvim',
+        lazy = true,
+        cmd = 'Telekasten',
         dependencies = { 'nvim-telescope/telescope.nvim' },
         config = function()
             require('telekasten').setup({
@@ -52,6 +66,8 @@ local plugins = {
 
     {
         'echasnovski/mini.cursorword',
+        lazy = true,
+        event = 'VeryLazy',
         config = true,
     },
 
@@ -110,16 +126,9 @@ local plugins = {
     },
 }
 
-local lockfile = vim.fn.stdpath('state') .. '/lazy-lock.json'
-if not vim.uv.fs_stat(lockfile) then
-    -- Seed writable state from this config, including when loaded with -u.
-    local config_dir = vim.fn.fnamemodify(debug.getinfo(1, 'S').source:sub(2), ':h:h')
-    vim.fn.mkdir(vim.fn.stdpath('state'), 'p')
-    assert(vim.uv.fs_copyfile(config_dir .. '/lazy-lock.json', lockfile))
-end
-
 require('lazy').setup(plugins, {
-    lockfile = lockfile,
+    -- Keep the generated lockfile writable when the config lives in the Nix store.
+    lockfile = vim.fn.stdpath('state') .. '/lazy-lock.json',
     defaults = {
         lazy = false,
     },
